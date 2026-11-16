@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.own.int.lifeCheck (OwnLife): the periodic scan for sections holding a mesh compiled for another position. */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, remap = false)
 abstract class OwnIntLifeScanMixin {
 	@Inject(method = "endFrame", at = @At("HEAD"))
 	private void mcopt$lifeScan(CallbackInfo ci) {

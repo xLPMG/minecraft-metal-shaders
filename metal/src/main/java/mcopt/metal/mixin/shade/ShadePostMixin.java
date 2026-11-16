@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * before the GUI) as the fallback for frames that skip render3dHud. mainRenderTarget is MetalFX's scaled world target while
  * that is on (GameRendererFxMixin swaps the field for the world part of the frame).
  */
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, remap = false)
 abstract class ShadePostMixin {
 	@Shadow @Final private RenderTarget mainRenderTarget;
 

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Any -Dmcopt.cpu.*=ab: counts frames for Ab's per-frame arms. */
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, remap = false)
 abstract class AbFrameMixin {
 	@Inject(method = "render", at = @At("HEAD"))
 	private void mcopt$frame(CallbackInfo ci) {

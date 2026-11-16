@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** -Dmcopt.own.int.animCopy: the atlas's sprites, animation states, size and mip count. */
-@Mixin(TextureAtlas.class)
+@Mixin(value = TextureAtlas.class, remap = false)
 public interface OwnAnimAtlasAccess {
 	@Accessor("sprites")
 	List<TextureAtlasSprite> mcopt$sprites();

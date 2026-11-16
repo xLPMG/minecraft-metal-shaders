@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * spin burns a core for nothing. Same deadline, same bookkeeping (the next frame is timed from when this one's wait ends),
  * but one wait on a timer that fires on time and no spin. Applies to every cap: the fps option, menus, AFK and minimized.
  */
-@Mixin(FramerateLimiter.class)
+@Mixin(value = FramerateLimiter.class, remap = false)
 abstract class FramerateLimiterMixin {
 	@Shadow
 	private static long lastFrameTime;

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** OwnLife's exception test: the dispatcher's copy lock. */
-@Mixin(SectionRenderDispatcher.class)
+@Mixin(value = SectionRenderDispatcher.class, remap = false)
 public interface OwnIntDispatcherLockAccess {
 	@Accessor("copyLock")
 	ReentrantLock mcopt$copyLock();

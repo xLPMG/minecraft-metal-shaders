@@ -109,14 +109,8 @@ public final class Profile {
 	 */
 	private static void distantHorizonsOnOpenGl() {
 		if (System.getProperty("mcopt.metal") != null) return;
-		String why;
-		try {
-			net.fabricmc.loader.api.FabricLoader loader = net.fabricmc.loader.api.FabricLoader.getInstance();
-			if (!loader.isModLoaded("distanthorizons")) return;
-			why = loader.isModLoaded("iris") ? "with Iris" : dhOpenGlEngine() ? "set to its OpenGL renderer" : null;
-		} catch (Throwable t) {
-			return;
-		}
+		if (!NeoForgePlatform.isModLoaded("distanthorizons")) return;
+		String why = NeoForgePlatform.isModLoaded("iris") ? "with Iris" : dhOpenGlEngine() ? "set to its OpenGL renderer" : null;
 		if (why == null) return;
 		System.setProperty("mcopt.metal", "false");
 		System.out.println("[mcopt] mcopt: Distant Horizons " + why + " needs OpenGL, using OpenGL; mcopt's other optimizations stay on (-Dmcopt.metal=true overrides)");
@@ -293,10 +287,6 @@ public final class Profile {
 	}
 
 	private static Path gameDir() {
-		try {
-			return net.fabricmc.loader.api.FabricLoader.getInstance().getGameDir();
-		} catch (Throwable t) {
-			return Path.of("").toAbsolutePath();
-		}
+		return NeoForgePlatform.gameDir();
 	}
 }

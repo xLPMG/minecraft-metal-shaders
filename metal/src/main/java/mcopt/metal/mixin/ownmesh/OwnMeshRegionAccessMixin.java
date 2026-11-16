@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 /** -Dmcopt.own.mesh.prefill: the region's section copies, for OwnRegion's unpack. */
-@Mixin(RenderSectionRegion.class)
+@Mixin(value = RenderSectionRegion.class, remap = false)
 abstract class OwnMeshRegionAccessMixin implements OwnRegionAccess {
 	@Shadow
 	@Final

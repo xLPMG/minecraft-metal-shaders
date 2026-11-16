@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.cpu",
 	"plugin": "mcopt.metal.mixin.cpu.CpuMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["LoadingFpsMixin", "EntityBoxVanillaMixin", "EntityRendererBoxInvoker", "EntityBoxAbMixin", "ModelLoopMixin", "ModelAbMixin", "AbFrameMixin", "LeashMixin", "LeashAbMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

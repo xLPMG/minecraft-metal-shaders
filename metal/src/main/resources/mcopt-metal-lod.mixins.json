@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.lod",
 	"plugin": "mcopt.metal.mixin.lod.LodMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"mixins": ["LodMaterialContextAccess", "LodTruthChunkMapMixin"],
 	"client": ["LodCameraMixin", "LodClientLevelMixin", "LodFogMixin", "LodLevelRendererMixin", "LodTruthOptionsMixin"],
 	"injectors": { "defaultRequire": 1 }

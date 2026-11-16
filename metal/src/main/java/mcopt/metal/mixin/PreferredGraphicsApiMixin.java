@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** Metal goes first in every backend list; OpenGL and Vulkan stay behind it as fallbacks. -Dmcopt.metal=false opts out. */
-@Mixin(PreferredGraphicsApi.class)
+@Mixin(value = PreferredGraphicsApi.class, remap = false)
 abstract class PreferredGraphicsApiMixin {
 	@Inject(method = "getBackendsToTry", at = @At("RETURN"), cancellable = true)
 	private void mcopt$metalFirst(CallbackInfoReturnable<GpuBackend[]> cir) {

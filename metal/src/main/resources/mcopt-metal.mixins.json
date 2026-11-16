@@ -1,7 +1,9 @@
 {
 	"required": true,
 	"package": "mcopt.metal.mixin",
+	"plugin": "mcopt.metal.mixin.MetalMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["FramerateLimiterMixin", "PreferredGraphicsApiMixin", "AnimFramesResidentMixin", "LightmapDoubleMixin", "AtlasDoubleMixin", "AtlasDoubleAtlasAccess", "AtlasDoubleTextureAccess", "AtlasDoubleSpriteAccess", "AtlasDoubleStateAccess"],
 	"injectors": { "defaultRequire": 1 }
 }

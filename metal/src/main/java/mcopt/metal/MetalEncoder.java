@@ -494,15 +494,17 @@ final class MetalEncoder implements CommandEncoderBackend {
 		int[] formats = redirect != null && redirect.delegate() == null ? redirect.colorFormats() : null;
 		this.passFormats = formats;
 		if (redirect != null && redirect.depth() != 0) {
-			this.currentPass = new MetalRenderPass(this, true, 0, 0, sub ? width : redirect.width(), sub ? height : redirect.height(), redirect.delegate(), formats);
+			int passWidth = sub ? width : redirect.width();
+			int passHeight = sub ? height : redirect.height();
+			this.currentPass = new MetalRenderPass(this, true, 0, 0, passWidth, passHeight, passWidth, passHeight, redirect.delegate(), formats);
 			return this.currentPass;
 		}
 		if (subPixels != 0) { // the live sub-rect
-			this.currentPass = new MetalRenderPass(this, depth != null, area.x(), area.y(), Math.min(area.width(), width), Math.min(area.height(), height),
+			this.currentPass = new MetalRenderPass(this, depth != null, area.x(), area.y(), Math.min(area.width(), width), Math.min(area.height(), height), width, height,
 				redirect != null ? redirect.delegate() : keptDelegate, formats);
 			return this.currentPass;
 		}
-		this.currentPass = new MetalRenderPass(this, depth != null, area.x(), area.y(), area.width(), area.height(),
+		this.currentPass = new MetalRenderPass(this, depth != null, area.x(), area.y(), area.width(), area.height(), width, height,
 			redirect != null ? redirect.delegate() : keptDelegate, formats);
 		return this.currentPass;
 	}
@@ -663,6 +665,15 @@ final class MetalEncoder implements CommandEncoderBackend {
 	@Override
 	public void clearDepthTexture(GpuTexture depthTexture, double clearDepth) {
 		this.deferClear(depthTexture, null, clearDepth);
+	}
+
+	@Override
+	public void clearStencilTexture(GpuTexture stencilTexture, int clearValue) {
+		if (this.currentPass != null) throw new IllegalStateException("Cannot clear stencil while a render pass is open");
+		MetalTexture texture = (MetalTexture) stencilTexture;
+		if (!texture.getFormat().hasStencilAspect()) throw new IllegalArgumentException("Texture has no stencil aspect: " + texture.getFormat());
+		this.flushClear(texture);
+		Native.clearStencil(this.enc, texture.handle, clearValue, texture.getMipLevels());
 	}
 
 	private void clearRegion(@Nullable MetalTexture color, @Nullable Vector4fc clearColor, @Nullable MetalTexture depth, double clearDepth,

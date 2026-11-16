@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Solid-section occlusion: a chunk leaving the client stops occluding (OwnSolid). */
-@Mixin(ClientLevel.class)
+@Mixin(value = ClientLevel.class, remap = false)
 abstract class OwnSolidLevelMixin {
 	@Inject(method = "unload", at = @At("HEAD"))
 	private void mcopt$solidUnload(LevelChunk levelChunk, CallbackInfo ci) {

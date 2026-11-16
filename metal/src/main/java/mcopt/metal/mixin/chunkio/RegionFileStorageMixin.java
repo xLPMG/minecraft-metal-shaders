@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * the LastUpdate stamp (see RegionSkip for why that is exact). Runs on the storage's IO thread at the moment vanilla would write,
  * so the stored bytes are the result of every earlier write of the chunk. Any doubt falls through to vanilla's write.
  */
-@Mixin(RegionFileStorage.class)
+@Mixin(value = RegionFileStorage.class, remap = false)
 abstract class RegionFileStorageMixin {
 	@Shadow @Final private RegionStorageInfo info;
 

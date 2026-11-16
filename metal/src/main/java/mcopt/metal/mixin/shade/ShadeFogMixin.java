@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * geometry) becomes the shaded water colour (ShadeFrameUpdater.waterFog: the light in the water through the same exposure
  * and tone curve as everything else) instead of vanilla's vivid blue, so the clear colour and the terrain's fog agree.
  */
-@Mixin(FogRenderer.class)
+@Mixin(value = FogRenderer.class, remap = false)
 abstract class ShadeFogMixin {
 	@Shadow
 	private FogType getFogType(Camera camera) {

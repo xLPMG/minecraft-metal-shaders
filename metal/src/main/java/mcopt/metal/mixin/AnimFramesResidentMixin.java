@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * -Dmcopt.metal.residentAnim: marks the texture creations of a sprite animation's frames (each frame is its own small texture, drawn into
  * the atlas on the ticks that need it) so the device keeps them resident. Does nothing without the flag.
  */
-@Mixin(targets = "net.minecraft.client.renderer.texture.SpriteContents$AnimatedTexture")
+@Mixin(targets = "net.minecraft.client.renderer.texture.SpriteContents$AnimatedTexture", remap = false)
 public class AnimFramesResidentMixin {
 	@Inject(method = "createAnimationState", at = @At("HEAD"))
 	private void mcopt$residentHead(CallbackInfoReturnable<?> cir) {

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Measurement only (-Dmcopt.own.int.frameLog): the client tick's time in the frame it runs in. */
-@Mixin(Minecraft.class)
+@Mixin(value = Minecraft.class, remap = false)
 public class FrameLogMinecraftMixin {
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void mcopt$frameLogTickHead(CallbackInfo ci) {

@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 /** Far terrain evaluates the dimension's material rules per column, as the game's surface pass does per block. */
-@Mixin(MaterialRuleContext.class)
+@Mixin(value = MaterialRuleContext.class, remap = false)
 public interface LodMaterialContextAccess {
 	@Invoker("<init>")
 	static MaterialRuleContext create(MaterialSystem system, RandomState randomState, DensityVolume expectedVolume, DensitySamplerSet densitySamplers,

@@ -37,7 +37,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * same per-block-entity extraction, the global block entities after). =verify lets vanilla run and checks every frame that the
  * block entities ours would take, in order, are vanilla's.
  */
-@Mixin(LevelExtractor.class)
+@Mixin(value = LevelExtractor.class, remap = false)
 abstract class OwnIntBlockEntitiesMixin {
 	@Shadow
 	@Final

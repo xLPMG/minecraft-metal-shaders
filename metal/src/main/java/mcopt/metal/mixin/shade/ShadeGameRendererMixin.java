@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** The projection every world draw uses (view bobbing, hurt tilt and nausea applied), for ShadeFrame's matrices. */
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, remap = false)
 abstract class ShadeGameRendererMixin {
 	@Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setProjectionMatrix(Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/ProjectionType;)V"))
 	private void mcopt$shadeProjection(CallbackInfo ci, @Local Matrix4f projectionMatrix) {

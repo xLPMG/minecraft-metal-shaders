@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.qos.server: the integrated server thread's class, set from the thread as it starts. */
-@Mixin(MinecraftServer.class)
+@Mixin(value = MinecraftServer.class, remap = false)
 abstract class ServerQosMixin {
 	@Inject(method = "runServer", at = @At("HEAD"))
 	private void mcopt$qos(CallbackInfo ci) {

@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * window's size, which the pause menu's resolution choice and the dynamic resolution never change. The fps entry is in both
  * of F3's default profiles. Only with mcopt.shade=true (ShadeMixinPlugin); mcopt.shade.f3=false: no line.
  */
-@Mixin(DebugEntryFps.class)
+@Mixin(value = DebugEntryFps.class, remap = false)
 abstract class ShadeDebugMixin {
 	@Inject(method = "display", at = @At("TAIL"))
 	private void mcopt$worldResolution(DebugScreenDisplayer displayer, Level level, LevelChunk clientChunk, LevelChunk serverChunk, CallbackInfo ci) {

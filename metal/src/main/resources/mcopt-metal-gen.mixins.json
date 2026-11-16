@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.gen",
 	"plugin": "mcopt.metal.mixin.gen.GenMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"mixins": ["GenWorldgenQosMixin", "GenNoiseChunkMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

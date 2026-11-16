@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Measurement only, NOT exact (-Dmcopt.own.int.noAnim): texture animations are never drawn into the atlases (they freeze). */
-@Mixin(TextureAtlas.class)
+@Mixin(value = TextureAtlas.class, remap = false)
 public class FrameLogNoAnimMixin {
 	@Inject(method = "uploadAnimationFrames", at = @At("HEAD"), cancellable = true)
 	private void mcopt$noAnim(CallbackInfo ci) {

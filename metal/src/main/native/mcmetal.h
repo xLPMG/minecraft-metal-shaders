@@ -24,7 +24,7 @@ typedef struct {
 	id<MTLTexture> colors[MAX_COLORS];  // attachments of `render`, compared by identity only
 	id<MTLTexture> depth;
 	int colorCount;
-	int width, height;  // of `render`'s viewport
+	int viewportX, viewportY, width, height;  // of `render`'s viewport
 	// Attachments whose contents died while `render` was open (the game cleared them): bit i = color i, bit 8 = depth.
 	// Their store actions are decided at endEncoding, so dead ones are never written back to memory.
 	unsigned dead;

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * -Dmcopt.own.mesh=true: the compiled mesh holds its compile's own quads until the upload hook (OwnRenderSectionMixin) has put
  * each own layer into the arena, on the same worker, in the same task.
  */
-@Mixin(CompiledSectionMesh.class)
+@Mixin(value = CompiledSectionMesh.class, remap = false)
 abstract class OwnMeshCompiledMixin implements OwnQuadHolder {
 	@Unique
 	private @Nullable OwnQuads mcopt$quads;

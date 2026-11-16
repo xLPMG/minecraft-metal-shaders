@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** The dispatcher going away (new level, resource reload) takes our sections with it. */
-@Mixin(SectionRenderDispatcher.class)
+@Mixin(value = SectionRenderDispatcher.class, remap = false)
 abstract class OwnSectionDispatcherMixin {
 	@Inject(method = "dispose", at = @At("HEAD"))
 	private void mcopt$ownDispose(CallbackInfo ci) {

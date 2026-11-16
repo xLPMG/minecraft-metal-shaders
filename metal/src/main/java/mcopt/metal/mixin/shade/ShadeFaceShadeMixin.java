@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.At;
  * (ShadeFrameUpdater.faceShadeOff), so a fallback to OpenGL keeps vanilla's look. Applied only once the terrain shader lights
  * faces (ShadeMixinPlugin, ShadeTerrain.LIT: port step P2); until then the terrain keeps vanilla's shade.
  */
-@Mixin(RenderSectionRegion.class)
+@Mixin(value = RenderSectionRegion.class, remap = false)
 abstract class ShadeFaceShadeMixin {
 	/** The last flat lighting handed out (one per "up" value: the overworld's and the Nether's). */
 	@Unique

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Far terrain: the far plane reaches past the far terrain (reversed Z on a float buffer: precision doesn't suffer). */
-@Mixin(Camera.class)
+@Mixin(value = Camera.class, remap = false)
 abstract class LodCameraMixin {
 	@Shadow private float depthFar;
 

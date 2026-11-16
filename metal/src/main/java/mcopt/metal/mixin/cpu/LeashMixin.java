@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * and returns null when that is null. For a Mob the same getLeashData() is asked through the class first; null gives null,
  * exactly as getLeashHolder would, anything else goes to getLeashHolder as before.
  */
-@Mixin(EntityRenderer.class)
+@Mixin(value = EntityRenderer.class, remap = false)
 abstract class LeashMixin {
 	@Redirect(method = "shouldRender", at = @At(value = "INVOKE",
 		target = "Lnet/minecraft/world/entity/Leashable;getLeashHolder()Lnet/minecraft/world/entity/Entity;"))

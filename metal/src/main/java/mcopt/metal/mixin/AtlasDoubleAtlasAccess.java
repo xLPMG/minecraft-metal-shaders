@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** -Dmcopt.metal.atlasDouble: the atlas's sprites, animation states, per-mip views (the animation passes' targets) and size. */
-@Mixin(TextureAtlas.class)
+@Mixin(value = TextureAtlas.class, remap = false)
 public interface AtlasDoubleAtlasAccess {
 	@Accessor("sprites")
 	List<TextureAtlasSprite> mcopt$adSprites();

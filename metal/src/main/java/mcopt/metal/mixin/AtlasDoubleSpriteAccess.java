@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** -Dmcopt.metal.atlasDouble: a sprite's padding (its animation quad is the sprite plus the padding on each side). */
-@Mixin(TextureAtlasSprite.class)
+@Mixin(value = TextureAtlasSprite.class, remap = false)
 public interface AtlasDoubleSpriteAccess {
 	@Accessor("padding")
 	int mcopt$adPadding();

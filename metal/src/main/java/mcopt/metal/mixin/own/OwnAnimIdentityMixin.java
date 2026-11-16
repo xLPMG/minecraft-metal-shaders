@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * One-pass animation: each animation state remembers the sprite contents that made it, so AnimOnePass matches an atlas's states to its
  * animated sprites by identity, not by position and count.
  */
-@Mixin(SpriteContents.class)
+@Mixin(value = SpriteContents.class, remap = false)
 abstract class OwnAnimIdentityMixin {
 	@Inject(method = "createAnimationState", at = @At("RETURN"))
 	private void mcopt$animOwner(CallbackInfoReturnable<SpriteContents.AnimationState> cir) {

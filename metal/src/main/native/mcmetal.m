@@ -1264,7 +1264,7 @@ static void openRender(Enc *enc, MTLRenderPassDescriptor *rp) {
 		if (rp.depthAttachment.texture) rpLogTex("depth", 0, rp.depthAttachment.texture, rpLoad(rp.depthAttachment.loadAction));
 		fflush(stdout);
 	}
-	[enc->render setViewport:(MTLViewport) {0, 0, enc->width, enc->height, 0, 1}];
+	[enc->render setViewport:(MTLViewport) {enc->viewportX, enc->viewportY, enc->width, enc->height, 0, 1}];
 	[enc->render setFrontFacingWinding:MTLWindingClockwise];  // vertex Y is flipped to keep GL/Vulkan row order, which mirrors winding too
 	enc->tlDepthCleared = rp.depthAttachment.texture && rp.depthAttachment.loadAction == MTLLoadActionClear;
 	enc->tlDepthClearValue = (float) rp.depthAttachment.clearDepth;
@@ -1373,6 +1373,11 @@ int mc_render_begin(Enc *enc, int count, id<MTLTexture> const *colors, const flo
 	id<MTLTexture> depth, int clearDepth, float depthValue, int width, int height) {
 	endBlit(enc);
 	if (sameTargets(enc, count, colors, clears, depth)) {
+		enc->width = width;
+		enc->height = height;
+		enc->viewportX = 0;
+		enc->viewportY = 0;
+		[enc->render setViewport:(MTLViewport) {0, 0, width, height, 0, 1}];
 		if (!clearDepth) return 1;
 		foldDepthClear(enc, depthValue, width, height);
 		return 2;
@@ -1407,6 +1412,8 @@ int mc_render_begin(Enc *enc, int count, id<MTLTexture> const *colors, const flo
 		}
 		enc->width = width;
 		enc->height = height;
+		enc->viewportX = 0;
+		enc->viewportY = 0;
 		openRender(enc, rp);
 		if (cpuPass && enc->samples) enc->cpuPassSampled = 1;
 	}
@@ -1588,6 +1595,14 @@ void mc_r_scissor(Enc *enc, int x, int y, int w, int h) {
 	[enc->render setScissorRect:(MTLScissorRect) {x, y, w, h}];
 }
 
+void mc_r_viewport(Enc *enc, int x, int y, int w, int h) {
+	enc->viewportX = x;
+	enc->viewportY = y;
+	enc->width = w;
+	enc->height = h;
+	if (enc->render) [enc->render setViewport:(MTLViewport) {x, y, w, h, 0, 1}];
+}
+
 // A buffer the vertex stage reaches through a GPU address stored in another buffer (bindless) must be made resident.
 void mc_r_use(Enc *enc, id<MTLBuffer> buffer) {
 	[enc->render useResource:buffer usage:MTLResourceUsageRead stages:MTLRenderStageVertex];
@@ -1725,6 +1740,23 @@ void mc_clear_rect(Enc *enc, id<MTLTexture> color, id<MTLTexture> depthTex, floa
 		[re setFragmentBytes:&c length:sizeof c atIndex:0];
 		[re drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:3];
 		[re endEncoding];
+	}
+}
+
+void mc_clear_stencil(Enc *enc, id<MTLTexture> stencil, int value, int mipLevels) {
+	endBlit(enc);
+	endRender(enc);
+	for (int mip = 0; mip < mipLevels; mip++) {
+		@autoreleasepool {
+			MTLRenderPassDescriptor *rp = [MTLRenderPassDescriptor renderPassDescriptor];
+			rp.stencilAttachment.texture = stencil;
+			rp.stencilAttachment.level = mip;
+			rp.stencilAttachment.loadAction = MTLLoadActionClear;
+			rp.stencilAttachment.clearStencil = (uint32_t) value;
+			rp.stencilAttachment.storeAction = MTLStoreActionStore;
+			id<MTLRenderCommandEncoder> re = [cmd(enc) renderCommandEncoderWithDescriptor:rp];
+			[re endEncoding];
+		}
 	}
 }
 

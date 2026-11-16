@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /** Data maps are loaded by ShadePbr, not stitched into the colour atlas (which would triple its size). */
-@Mixin(SpriteLoader.class)
+@Mixin(value = SpriteLoader.class, remap = false)
 public class ShadePbrSpritesMixin {
 	@Shadow @Final private Identifier location;
 

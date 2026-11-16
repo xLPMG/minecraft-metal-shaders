@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 /** -Dmcopt.startup.fadeMs=N: the loading overlay's fade-out (1000 ms) and fade-in (500 ms) scaled to N and N/2. */
-@Mixin(LoadingOverlay.class)
+@Mixin(value = LoadingOverlay.class, remap = false)
 abstract class FadeMixin {
 	@ModifyConstant(method = "extractRenderState", constant = @Constant(floatValue = 1000.0f))
 	private float mcopt$fadeOut(float v) {

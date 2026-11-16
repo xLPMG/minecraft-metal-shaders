@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.startup",
 	"plugin": "mcopt.metal.mixin.startup.StartupMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["NarratorMixin", "CrashPreloadMixin", "BlockCacheMixin", "BootstrapCacheMixin", "FadeMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

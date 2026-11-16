@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * graph runs (Sodium's lists and uploads for this frame are done by then, and no world pass has opened yet, so the
  * Sky + Main encoder merge is untouched); the debug view at the end.
  */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, remap = false)
 abstract class ShadowLevelRendererMixin {
 	@Inject(method = "render", at = @At("HEAD"))
 	private void mcopt$shadowBegin(GraphicsResourceAllocator resourceAllocator, boolean renderOutline, CameraRenderState cameraState, GpuBufferSlice terrainFog,

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 /** Ground truth (test only, -Dmcopt.lod.truthRd=N): the integrated server sends chunks out to N instead of 32. */
-@Mixin(ChunkMap.class)
+@Mixin(value = ChunkMap.class, remap = false)
 abstract class LodTruthChunkMapMixin {
 	@ModifyConstant(method = "setServerViewDistance", constant = @Constant(intValue = 32), require = 1)
 	private int mcopt$truthView(int max) {

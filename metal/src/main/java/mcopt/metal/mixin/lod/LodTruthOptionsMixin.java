@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
  * after the render distance's name in the constructor (its range, then the simulation distance's): key codes of 32 earlier
  * in the constructor stay. Applied only with that switch.
  */
-@Mixin(Options.class)
+@Mixin(value = Options.class, remap = false)
 abstract class LodTruthOptionsMixin {
 	@ModifyConstant(method = "<init>", constant = @Constant(intValue = 32), require = 2,
 		slice = @Slice(from = @At(value = "CONSTANT", args = "stringValue=options.renderDistance")))

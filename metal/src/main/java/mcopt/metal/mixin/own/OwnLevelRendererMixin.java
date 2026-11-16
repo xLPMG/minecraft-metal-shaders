@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Our near terrain draws the opaque group (solid, cutout) in vanilla's place; translucent stays vanilla's. */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, remap = false)
 abstract class OwnLevelRendererMixin {
 	@Shadow
 	@Final

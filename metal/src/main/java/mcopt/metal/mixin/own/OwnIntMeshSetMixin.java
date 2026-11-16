@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** -Dmcopt.own.int.visible (OwnVisible): sections whose new mesh renders block entities (after the mesh is set). */
-@Mixin(SectionRenderDispatcher.RenderSection.class)
+@Mixin(value = SectionRenderDispatcher.RenderSection.class, remap = false)
 abstract class OwnIntMeshSetMixin {
 	@Inject(method = "setSectionMesh", at = @At("RETURN"))
 	private void mcopt$meshSet(SectionMesh sectionMesh, CallbackInfoReturnable<SectionMesh> cir) {

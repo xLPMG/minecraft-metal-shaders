@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Shadow;
  * OwnLife: the compile task running on this thread and the section position it compiles, for our store's check. The whole doTask is
  * wrapped and the previous context restored in finally, so an exception can't leave the thread pointing at the task.
  */
-@Mixin(targets = "net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection$CompileTask")
+@Mixin(targets = "net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection$CompileTask", remap = false)
 abstract class OwnIntLifeTaskMixin {
 	@Shadow
 	@Final

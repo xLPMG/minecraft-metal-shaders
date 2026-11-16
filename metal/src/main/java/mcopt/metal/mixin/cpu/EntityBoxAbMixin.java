@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.cpu.entityBox=ab: times the frame's entity pass with the box reuse alternately off and on (see Ab). */
-@Mixin(LevelExtractor.class)
+@Mixin(value = LevelExtractor.class, remap = false)
 abstract class EntityBoxAbMixin {
 	@Unique private static final Ab mcopt$ab = new Ab("entityBox.extractVisibleEntities");
 

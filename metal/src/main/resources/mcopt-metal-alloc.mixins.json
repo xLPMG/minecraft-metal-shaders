@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.alloc",
 	"plugin": "mcopt.metal.mixin.alloc.AllocMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"mixins": ["LightMapMixin", "PalettePackingMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

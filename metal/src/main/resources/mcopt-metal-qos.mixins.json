@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.qos",
 	"plugin": "mcopt.metal.mixin.qos.QosMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["RenderQosMixin", "ServerQosMixin", "WorkerQosMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.shade.vl.mixin",
 	"plugin": "mcopt.metal.shade.vl.mixin.VlMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["VlGameRendererMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Far terrain: the camera at the top of the level's frame, the draw at the end of its opaque phase (after the real terrain). */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, remap = false)
 abstract class LodLevelRendererMixin {
 	@Inject(method = "render", at = @At("HEAD"))
 	private void mcopt$lodBegin(GraphicsResourceAllocator resourceAllocator, boolean renderOutline, CameraRenderState cameraState, GpuBufferSlice terrainFog,

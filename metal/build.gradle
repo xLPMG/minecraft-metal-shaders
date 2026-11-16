@@ -1,15 +1,35 @@
 plugins {
-	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'net.neoforged.moddev'
 }
 
 version = '1.2.7-alpha'
 
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+repositories {
+	maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+}
+
+def mixinRefmapFile = layout.buildDirectory.file('mixin/mcopt_metal.refmap.json')
+
 dependencies {
-	minecraft "com.mojang:minecraft:${minecraft_version}"
-	implementation "net.fabricmc:fabric-loader:${loader_version}"
-	// Our mesher's FRAPI path (mcopt.metal.own.OwnFrapi, loaded only when Fabric API's renderer API is): compile only, never bundled.
-	compileOnly "net.fabricmc.fabric-api:fabric-renderer-api-v1:17.0.15+79385d0b5d"
-	compileOnly "net.fabricmc.fabric-api:fabric-api-base:2.0.6+fcdff87f5d"
+	annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
+}
+
+neoForge {
+	version = neoforge_version
+
+	runs {
+		client {
+			client()
+		}
+	}
+
+	mods {
+		"mcopt_metal" {
+			sourceSet sourceSets.main
+		}
+	}
 }
 
 def nativeOut = layout.buildDirectory.dir('natives/natives')
@@ -27,8 +47,18 @@ tasks.register('compileNative', Exec) {
 processResources {
 	dependsOn 'compileNative'
 	from(layout.buildDirectory.dir('natives'))
-	inputs.property 'version', version
-	filesMatching('fabric.mod.json') { expand 'version': version }
+	inputs.properties([
+		version: version,
+		minecraft_version: minecraft_version,
+		neoforge_version: neoforge_version
+	])
+	filesMatching('META-INF/neoforge.mods.toml') {
+		expand(
+			version: version,
+			minecraft_version_range: "[${minecraft_version}]",
+			neoforge_version_range: "[${neoforge_version},)"
+		)
+	}
 }
 
 // Double-clicking the jar (java -jar) explains that it's a Fabric mod and how to install it.
@@ -38,10 +68,15 @@ jar {
 	from(rootProject.file('LICENSE'))
 	from(rootProject.file('NOTICE'))
 	from(rootProject.file('LICENSES')) { into 'LICENSES' }
+	from(mixinRefmapFile)
 }
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 25
+	if (it.name == 'compileJava') {
+		it.options.compilerArgs += ["-AoutRefMapFile=${mixinRefmapFile.get().asFile.absolutePath}"]
+		it.outputs.file(mixinRefmapFile)
+	}
 	// the far terrain's Vector API noise control (LodNoiseVector, opt-in -Dmcopt.lod.nativeNoise=vector): loaded only when the game runs with
 	// --add-modules jdk.incubator.vector
 	if (it.name == 'compileJava') it.options.compilerArgs += ['--add-modules', 'jdk.incubator.vector']

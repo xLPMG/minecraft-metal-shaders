@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * FastPalette: decode clean palettes without DFU (parse), encode without DFU (serialize), otherwise vanilla. Same strategies,
  * same default values, same record.
  */
-@Mixin(PalettedContainerFactory.class)
+@Mixin(value = PalettedContainerFactory.class, remap = false)
 abstract class PalettedContainerFactoryMixin {
 	@Inject(method = "create", at = @At("RETURN"), cancellable = true)
 	private static void mcopt$fastCodecs(RegistryAccess registries, CallbackInfoReturnable<PalettedContainerFactory> cir) {

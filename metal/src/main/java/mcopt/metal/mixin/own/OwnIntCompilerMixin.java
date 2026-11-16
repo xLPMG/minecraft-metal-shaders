@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** Native shading on our near terrain (OwnMaterials): the class of every block the compiler visits, for the store pass. */
-@Mixin(SectionCompiler.class)
+@Mixin(value = SectionCompiler.class, remap = false)
 abstract class OwnIntCompilerMixin {
 	@Inject(method = "compile", at = @At("HEAD"))
 	private void mcopt$compileBegin(CallbackInfoReturnable<SectionCompiler.Results> cir) {
@@ -24,7 +24,9 @@ abstract class OwnIntCompilerMixin {
 		if (OwnMaterials.ON) OwnMaterials.compiling(false);
 	}
 
-	@Redirect(method = "compile", at = @At(value = "INVOKE",
+	// NeoForge adds a deprecated four-argument bridge; the block-state call is in the five-argument implementation.
+	@Redirect(method = "compile(Lnet/minecraft/core/SectionPos;Lnet/minecraft/client/renderer/chunk/RenderSectionRegion;Lcom/mojang/blaze3d/vertex/VertexSorting;Lnet/minecraft/client/renderer/SectionBufferBuilderPack;Ljava/util/List;)Lnet/minecraft/client/renderer/chunk/SectionCompiler$Results;",
+		at = @At(value = "INVOKE",
 		target = "Lnet/minecraft/client/renderer/chunk/RenderSectionRegion;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"))
 	private BlockState mcopt$ownMaterial(RenderSectionRegion region, BlockPos pos) {
 		BlockState state = region.getBlockState(pos);

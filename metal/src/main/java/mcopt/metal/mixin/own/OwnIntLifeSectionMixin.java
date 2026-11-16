@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * The whole method is wrapped, the lock released in finally: an exception in reset can't leave it held.
  * -Dmcopt.own.int.lifeLockStats times the wait and the hold; -Dmcopt.own.int.lifeThrowTest=N (test only) throws in the N-th reset.
  */
-@Mixin(SectionRenderDispatcher.RenderSection.class)
+@Mixin(value = SectionRenderDispatcher.RenderSection.class, remap = false)
 abstract class OwnIntLifeSectionMixin {
 	@Shadow
 	@Final

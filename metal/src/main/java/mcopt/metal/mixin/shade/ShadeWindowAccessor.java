@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 /** (2026-10-09) The window's own framebuffer refresh, for the output resolution's runtime changes (ShadeOutput.apply). */
-@Mixin(Window.class)
+@Mixin(value = Window.class, remap = false)
 public interface ShadeWindowAccessor {
 	@Invoker("refreshFramebufferSize")
 	void mcopt$refreshFramebufferSize();

@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * in a flight (Neo: ~74 MB/s on the server's light workers, ~11 MB/s on the client). With the map copy-on-write by bucket
  * (CowLong2ObjectMap) a publish costs O(256) and a later write copies only the bucket it touches; snapshots stay immutable.
  */
-@Mixin(DataLayerStorageMap.class)
+@Mixin(value = DataLayerStorageMap.class, remap = false)
 abstract class LightMapMixin {
 	@Shadow @Final @Mutable protected Long2ObjectOpenHashMap<DataLayer> map;
 

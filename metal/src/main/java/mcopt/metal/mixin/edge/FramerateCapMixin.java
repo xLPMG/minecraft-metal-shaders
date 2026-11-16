@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(FramerateLimitTracker.class)
+@Mixin(value = FramerateLimitTracker.class, remap = false)
 abstract class FramerateCapMixin {
 	@Inject(method = "getFramerateLimit", at = @At("RETURN"), cancellable = true)
 	private void mcopt$edgeCap(CallbackInfoReturnable<Integer> cir) {

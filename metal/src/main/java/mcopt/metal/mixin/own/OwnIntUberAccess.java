@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** -Dmcopt.own.int.lists (OwnIntListsMixin): whether one of vanilla's uber buffers holds any section's geometry. */
-@Mixin(UberGpuBuffer.class)
+@Mixin(value = UberGpuBuffer.class, remap = false)
 public interface OwnIntUberAccess {
 	@Accessor("allocationMap")
 	Map<?, ?> mcopt$allocations();

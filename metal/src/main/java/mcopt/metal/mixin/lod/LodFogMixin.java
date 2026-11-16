@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * chunks), and the sky's fog end follows. Priority 500 so this runs before Sodium's own RETURN hook, which copies the fog
  * into its chunk shader's parameters.
  */
-@Mixin(value = FogRenderer.class, priority = 500)
+@Mixin(value = FogRenderer.class, priority = 500, remap = false)
 abstract class LodFogMixin {
 	@ModifyArg(method = "setupFog", at = @At(value = "INVOKE",
 		target = "Lnet/minecraft/client/renderer/fog/FogRenderer;computeFogColor(Lnet/minecraft/client/Camera;FLnet/minecraft/client/multiplayer/ClientLevel;IFLorg/joml/Vector4f;)V"),

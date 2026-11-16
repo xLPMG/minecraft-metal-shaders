@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * served from the region's per-position arrays (same values as vanilla's 100-entry hash caches compute). Any other level:
  * untouched.
  */
-@Mixin(BlockModelLighter.Cache.class)
+@Mixin(value = BlockModelLighter.Cache.class, remap = false)
 abstract class OwnMeshLighterCacheMixin {
 	@Inject(method = "getLightCoords", at = @At("HEAD"), cancellable = true)
 	private void mcopt$ownLight(BlockState state, BlockAndTintGetter level, BlockPos pos, CallbackInfoReturnable<Integer> cir) {

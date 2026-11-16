@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** Stats only (-Dmcopt.own.stats): the meshing time of every section compile. */
-@Mixin(SectionCompiler.class)
+@Mixin(value = SectionCompiler.class, remap = false)
 abstract class OwnSectionCompilerMixin {
 	private static final ThreadLocal<long[]> MCOPT$START = ThreadLocal.withInitial(() -> new long[1]);
 

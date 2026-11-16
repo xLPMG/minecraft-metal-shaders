@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** -Dmcopt.own.mesh=true: our mesher instead of vanilla's compile; =verify: the digest check after it; .stats: per-section costs. */
-@Mixin(value = SectionCompiler.class, priority = 900)
+@Mixin(value = SectionCompiler.class, priority = 900, remap = false)
 abstract class OwnMeshCompilerMixin {
 	@Shadow
 	@Final

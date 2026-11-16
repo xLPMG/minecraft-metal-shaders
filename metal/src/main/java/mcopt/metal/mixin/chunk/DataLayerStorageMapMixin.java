@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** C3 (-Dmcopt.chunk.light=true|verify): record the updating map's mutated keys; build snapshots on copy (see LightSnapshots). */
-@Mixin(DataLayerStorageMap.class)
+@Mixin(value = DataLayerStorageMap.class, remap = false)
 abstract class DataLayerStorageMapMixin implements LightSnapshots {
 	@Shadow @Final protected Long2ObjectOpenHashMap<DataLayer> map;
 

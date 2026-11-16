@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.qos.render: the render thread's class, set as the game loop starts. */
-@Mixin(Minecraft.class)
+@Mixin(value = Minecraft.class, remap = false)
 abstract class RenderQosMixin {
 	@Inject(method = "run", at = @At("HEAD"))
 	private void mcopt$qos(CallbackInfo ci) {

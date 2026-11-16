@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Solid-section occlusion: every section vanilla marks dirty is checked again (OwnSolid; nothing without -Dmcopt.own.solidOcc). */
-@Mixin(LevelExtractor.class)
+@Mixin(value = LevelExtractor.class, remap = false)
 abstract class OwnSolidExtractorMixin {
 	@Inject(method = "setSectionDirty(IIIZ)V", at = @At("HEAD"))
 	private void mcopt$solidDirty(int sectionX, int sectionY, int sectionZ, boolean playerChanged, CallbackInfo ci) {

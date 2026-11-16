@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.Overwrite;
  * actually ticks. The same LCG steps (Level.randValue, as getBlockRandomPos), the same picks in the same order, the same states
  * read, the same tick calls with the same RandomSource, the same profiler sections.
  */
-@Mixin(ServerLevel.class)
+@Mixin(value = ServerLevel.class, remap = false)
 abstract class ServerLevelTickMixin {
 	/**
 	 * @author mcopt

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /** Preserve the original extraction and ordering unless the verified vignette blend is the identity. */
-@Mixin(Hud.class)
+@Mixin(value = Hud.class, remap = false)
 abstract class OwnVignetteMixin {
 	@Redirect(method = "extractVignette", at = @At(value = "INVOKE",
 		target = "Lnet/minecraft/client/gui/GuiGraphicsExtractor;blit(Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIFFIIIII)V"))

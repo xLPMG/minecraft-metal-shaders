@@ -3,7 +3,6 @@ package mcopt.metal.mixin.chunkio;
 import java.util.List;
 import java.util.Set;
 import mcopt.metal.chunkio.ChunkIo;
-import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -32,7 +31,7 @@ public final class ChunkIoMixinPlugin implements IMixinConfigPlugin {
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
 		String name = mixinClassName.substring(mixinClassName.lastIndexOf('.') + 1);
 		if (!ChunkIo.mixinEnabled(name)) return false;
-		if (FabricLoader.getInstance().isModLoaded("c2me")) {
+		if (mcopt.metal.NeoForgePlatform.isModLoaded("c2me")) {
 			System.out.println("mcopt-chunk: " + name + " not applied: c2me is loaded");
 			return false;
 		}

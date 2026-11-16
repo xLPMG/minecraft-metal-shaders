@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.gen.worldgenQos=CLASS: a thread filling a chunk from the noise puts itself in that QoS class (once). */
-@Mixin(NoiseBasedChunkGenerator.class)
+@Mixin(value = NoiseBasedChunkGenerator.class, remap = false)
 abstract class GenWorldgenQosMixin {
 	@Inject(method = "doFill", at = @At("HEAD"))
 	private void mcopt$qos(CallbackInfo ci) {

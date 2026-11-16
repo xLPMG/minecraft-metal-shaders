@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.edge",
 	"plugin": "mcopt.metal.mixin.edge.EdgeMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"mixins": ["GenSignalMixin"],
 	"client": ["FramerateCapMixin"],
 	"injectors": { "defaultRequire": 1 }

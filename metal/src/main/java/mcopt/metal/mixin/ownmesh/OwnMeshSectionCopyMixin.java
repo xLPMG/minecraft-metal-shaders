@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 /** -Dmcopt.own.mesh.prefill: a section copy's states and debug flag, for OwnRegion's unpack. */
-@Mixin(SectionCopy.class)
+@Mixin(value = SectionCopy.class, remap = false)
 abstract class OwnMeshSectionCopyMixin implements OwnRegionAccess.Copy {
 	@Shadow
 	@Final

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** -Dmcopt.cpu.model=ab: times FeatureRenderDispatcher.prepareFrame (where models are built) with the lever alternately off/on. */
-@Mixin(FeatureRenderDispatcher.class)
+@Mixin(value = FeatureRenderDispatcher.class, remap = false)
 abstract class ModelAbMixin {
 	@Unique private static final Ab mcopt$ab = new Ab("model.prepareFrame");
 

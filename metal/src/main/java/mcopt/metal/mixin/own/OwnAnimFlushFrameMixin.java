@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.own.int.animOnePass: anything still noted (an atlas ticked outside the texture manager's tick) drawn before the frame renders. */
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, remap = false)
 public class OwnAnimFlushFrameMixin {
 	@Inject(method = "render", at = @At("HEAD"))
 	private void mcopt$animFlushFrame(CallbackInfo ci) {

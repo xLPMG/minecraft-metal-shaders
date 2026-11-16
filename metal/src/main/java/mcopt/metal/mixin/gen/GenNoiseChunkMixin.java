@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /** -Dmcopt.gen.nativeNoise: a NoiseChunk's samplers (its fill, aquifer and surface) through LodNativeNoise's copies. */
-@Mixin(NoiseChunk.class)
+@Mixin(value = NoiseChunk.class, remap = false)
 abstract class GenNoiseChunkMixin {
 	@Redirect(method = "<init>", at = @At(value = "INVOKE",
 		target = "Lnet/minecraft/world/level/levelgen/RandomState;samplersWithContext(Lnet/minecraft/world/level/levelgen/densityfunction/SamplerContext;)Lnet/minecraft/world/level/levelgen/densityfunction/DensitySamplerSet;"))

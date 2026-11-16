@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Measurement only (-Dmcopt.own.int.frameLog): vanilla's section scheduling and translucent resort scheduling times. */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, remap = false)
 public class FrameLogLevelRendererMixin {
 	@Inject(method = "compileSections", at = @At("HEAD"))
 	private void mcopt$frameLogCompileHead(CameraRenderState camera, CallbackInfo ci) {

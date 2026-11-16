@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 /** D1 (poi=true): SectionStorage's own section lookup (loads the chunk's data if needed) and height range. */
-@Mixin(SectionStorage.class)
+@Mixin(value = SectionStorage.class, remap = false)
 public interface SectionStorageAccess {
 	@Invoker("getOrLoad")
 	Optional<?> mcopt$getOrLoad(long sectionPos);

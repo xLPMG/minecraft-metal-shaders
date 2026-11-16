@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * target at the start of render3dHud, before the hand, which (with screen effects and the GUI) then draws at native
  * resolution. Applies only with mcopt.shade=true (ShadeMixinPlugin); does nothing with mcopt.shade.taa=false.
  */
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, remap = false)
 abstract class ShadeTaaGameRendererMixin {
 	@Shadow @Final @Mutable private RenderTarget mainRenderTarget;
 	@Shadow @Final private GameRenderState gameRenderState;

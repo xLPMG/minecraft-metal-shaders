@@ -2,7 +2,6 @@ package mcopt.metal.mixin.alloc;
 
 import java.util.List;
 import java.util.Set;
-import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -21,7 +20,7 @@ public final class AllocMixinPlugin implements IMixinConfigPlugin {
 			if (!Boolean.parseBoolean(System.getProperty("mcopt.alloc.palettePacking", "true"))) return false;
 			// Lithium replaces pack and already caches its temporary IDs. Its method
 			// has no vanilla reencodeContents call for our required redirect to target.
-			if (FabricLoader.getInstance().isModLoaded("lithium")) {
+			if (mcopt.metal.NeoForgePlatform.isModLoaded("lithium")) {
 				System.out.println("mcopt-alloc: PalettePackingMixin not applied: lithium is loaded");
 				return false;
 			}

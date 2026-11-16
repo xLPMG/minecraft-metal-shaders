@@ -9,7 +9,7 @@ import org.jspecify.annotations.Nullable;
 public interface OwnRegionAccess {
 	SectionCopy[] mcopt$sections();
 
-	/** -Dmcopt.own.mesh.frapiRegion: the compile cache serving this region while our compile runs on it, else null. */
+	/** Legacy Fabric Renderer API path: the compile cache serving this region while our compile runs on it, else null. */
 	@Nullable OwnRegion mcopt$own();
 
 	void mcopt$own(@Nullable OwnRegion own);

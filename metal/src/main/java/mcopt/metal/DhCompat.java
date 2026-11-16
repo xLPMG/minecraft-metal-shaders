@@ -27,29 +27,16 @@ public final class DhCompat {
 	}
 
 	public static boolean loaded() {
-		try {
-			return net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded(MOD_ID);
-		} catch (Throwable t) {
-			return false;
-		}
+		return NeoForgePlatform.isModLoaded(MOD_ID);
 	}
 
 	public static boolean irisLoaded() {
-		try {
-			return net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("iris");
-		} catch (Throwable t) {
-			return false;
-		}
+		return NeoForgePlatform.isModLoaded("iris");
 	}
 
 	/** DH's version string ("3.3.4"), or "" if DH is absent or unreadable. */
 	public static String version() {
-		try {
-			return net.fabricmc.loader.api.FabricLoader.getInstance().getModContainer(MOD_ID)
-				.map(c -> c.getMetadata().getVersion().getFriendlyString()).orElse("");
-		} catch (Throwable t) {
-			return "";
-		}
+		return NeoForgePlatform.modVersion(MOD_ID);
 	}
 
 	/** True when DH's version is inside the tested range (or {@code -Dmcopt.dh.anyVersion=true}). */

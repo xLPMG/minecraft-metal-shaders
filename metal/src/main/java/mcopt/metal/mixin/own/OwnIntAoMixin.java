@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * grey colour, which the tint then multiplies; here the grey is taken out before the tint (the corners start white, so they get
  * the tint exactly) and put back as the corners' alpha, which terrain vertices otherwise keep at 255. gbuffer.metal reads it so.
  */
-@Mixin(ModelBlockRenderer.class)
+@Mixin(value = ModelBlockRenderer.class, remap = false)
 abstract class OwnIntAoMixin {
 	@Shadow
 	@Final

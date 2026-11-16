@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Native shading's per-frame values, at the top of the level's frame (before its sky and terrain passes). */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, remap = false)
 abstract class ShadeLevelRendererMixin {
 	@Inject(method = "render", at = @At("HEAD"))
 	private void mcopt$shadeFrame(GraphicsResourceAllocator resourceAllocator, boolean renderOutline, CameraRenderState cameraState, GpuBufferSlice terrainFog,

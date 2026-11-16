@@ -124,14 +124,14 @@ For reference, on the same Mac: Iris + Complementary Reimagined (OpenGL) at 3024
 You need:
 
 - An **Apple Silicon Mac** (M1 or newer) on **macOS 15 Sequoia** or later
-- **Minecraft: Java Edition 26.3** with **Fabric Loader 0.19.5** or newer, on **Java 25**
+- **Minecraft: Java Edition 26.3** with **NeoForge 26.3.0.103** or newer, on **Java 25**
 
-That's all: since 1.2 **Sodium is not needed** (mcopt 0.3 draws the terrain itself), and the game won't start with Sodium
-installed next to it.
+That's all: since 1.2 **Sodium is not needed** (mcopt 0.3 draws the terrain itself). Do not install Sodium or Embeddium
+alongside Metal Shaders.
 
 Steps:
 
-1. Install Fabric for 26.3 ([installer](https://fabricmc.net/use/installer/), or in Prism Launcher: new instance → 26.3 → Fabric).
+1. Install NeoForge for 26.3 ([installer](https://neoforged.net/), or in Prism Launcher: new instance → 26.3 → NeoForge).
 2. Put `metal-shaders-<version>.jar` (from [Releases](https://github.com/GaelQuinta/minecraft-metal-shaders/releases/latest))
    in your `mods` folder.
 3. Start the game. The shaders are on from the first launch (balanced preset).
@@ -139,10 +139,11 @@ Steps:
 **Updating from 1.0:** take Sodium out of the `mods` folder and replace the old Metal Shaders jar. Your settings are kept
 (the config's `profile=alpha` line changes to `profile=indie` by itself, the terrain renderer the shaders light).
 
-**"Incompatible mods found!" with Sodium?** Fabric's message suggests replacing Metal Shaders with a version that is
-compatible with Sodium. There isn't one, and none is needed: **remove Sodium** (`sodium-*.jar`) from the `mods` folder,
-along with the mods that need it (Iris, Sodium Extra, Reese's Sodium Options...). Since 1.2, Metal Shaders draws the
-terrain itself.
+**"Incompatible mods found!" with Embeddium or Sodium?** Metal Shaders draws the terrain itself, so those renderers cannot
+run alongside it. Remove Embeddium or Sodium from the `mods` folder.
+
+**Block models:** the NeoForge build uses Minecraft's normal block-model renderer. Models that require Fabric's Renderer
+API (FRAPI) are not supported by this build.
 
 **Settings:** pause the game and press **Shaders...** (above the Resolution and Output buttons). Changes show at once behind
 the menu; the ones marked with `*` apply after restarting the game. **Reset page** / **Reset all** bring back the defaults.
@@ -163,7 +164,7 @@ also edit it by hand:
 
 For the most FPS: Video Settings → VSync off, Max Framerate unlimited. To see your FPS, press **F3**.
 
-**Distant Horizons** (optional): add Distant Horizons 3.3.4 for 26.3 and Fabric API to the mods folder. It runs on Metal
+**Distant Horizons** (optional): add a NeoForge-compatible build for Minecraft 26.3 to the mods folder. It runs on Metal
 too, and its far terrain is lit by the same shaders (DH's own SSAO, anti-aliasing and fog are turned off while they run).
 Since **1.2.2**, **Shaders... → Performance → Distant Horizons** picks DH's distance and detail from presets tested with the
 shaders (DH's own / Performance 32 chunks / Balanced 64, the default / Quality 96 / Ultra 128; on an M4 at 1080p with 8 normal
@@ -224,19 +225,18 @@ Made by Gael Quintanilla, with Claude (Anthropic) writing most of the code.
 En una MacBook Pro M4 a resolución completa (3024×1964), Iris + Complementary corre a ~22 FPS. Con Metal Shaders,
 la misma Mac a la misma resolución da **90–120 FPS** (preset balanceado), y **135–150 FPS** a 1440p.
 
-**Instalación:** Mac con Apple Silicon y macOS 15 Sequoia o más nuevo (también 26 y 27), Minecraft 26.3 con Fabric 0.19.5 y
-Java 25. Desde la 1.2 **ya no hace falta Sodium** (mcopt 0.3 dibuja el terreno por su cuenta; con Sodium instalado el juego no
-arranca). Pon el jar de [Releases](https://github.com/GaelQuinta/minecraft-metal-shaders/releases/latest) en la carpeta `mods`
+**Instalación:** Mac con Apple Silicon y macOS 15 Sequoia o más nuevo (también 26 y 27), Minecraft 26.3 con NeoForge 26.3.0.103
+y Java 25. Desde la 1.2 **ya no hace falta Sodium** (mcopt 0.3 dibuja el terreno por su cuenta; no instales Sodium ni
+Embeddium). Pon el jar de [Releases](https://github.com/GaelQuinta/minecraft-metal-shaders/releases/latest) en la carpeta `mods`
 y abre el juego: los shaders se activan solos (preset balanceado). **Si vienes de la 1.0:** quita Sodium de `mods` y cambia el
-jar viejo por el nuevo; tus ajustes se conservan. **¿Fabric dice "Incompatible mods found!" por Sodium?** Te sugiere cambiar
-Metal Shaders por una versión compatible con Sodium, pero no existe ni hace falta: **quita Sodium** (`sodium-*.jar`) de `mods`,
-junto con los mods que lo necesitan (Iris, Sodium Extra, Reese's Sodium Options...).
+jar viejo por el nuevo; tus ajustes se conservan. **¿NeoForge indica incompatibilidad con Embeddium o Sodium?** Esos
+renderizadores no funcionan junto a Metal Shaders; quítalos de `mods`.
 
 **Ajustes:** pausa el juego y entra a **Shaders...**: unos 120 ajustes en 11 páginas (iluminación, sombras, color y cámara,
 atmósfera, rayos de sol, nubes, cielo de noche, agua, clima, Nether y End, rendimiento), en español e inglés según el idioma del
 juego. Casi todos se ven al momento; los marcados con `*` se aplican al reiniciar. Nubes: volumétricas, **cuadradas** (las de
 Minecraft con volumen, luz y sombras), las normales del juego, o ninguna. **General → Shaders: Sí/No** (desde la 1.2.1) los apaga al reiniciar para usar mcopt 0.3 tal cual (más FPS); el botón **Shaders...** sigue en el menú de pausa para volver a prenderlos. Desde la 1.2.5 (aportes de LiamHuth): HDR de **escena completa** opcional (Shaders... → Color y cámara → Pantalla HDR → Modo HDR), iluminación **Natural** opcional (Iluminación → Modo de iluminación), brillo del haz del faro y salida 2160p para monitores 4K. La resolución de salida se cambia con el botón
-**"Salida"** del menú de pausa, y la interna con **"Resolución"** (desde la 1.2.4, en % de la salida: 85, 75, 67, 59 o 50 %, o Auto; también en **Shaders... → Rendimiento**). Compatible con Distant Horizons 3.3.4 + Fabric API (opcional); desde la 1.2.2, en **Shaders... → Rendimiento → Distant Horizons** eliges presets de DH probados con los shaders (Rendimiento, Balanceado, Calidad, Ultra), y el agua lejana de DH siempre tiene los reflejos de los shaders. El preset gráfico **Fabulous** ya funciona (antes el agua se volvía invisible). Desde la 1.2.3, cuando estás alto (a la altura de las nubes o arriba de ellas), los bordes de las nubes ya no se ven a través de las lomas y los árboles que tienes enfrente; con DH, una nube detrás de una montaña lejana de DH, por debajo del horizonte, todavía puede verse encima de ella. Si con DH la mitad de
+**"Salida"** del menú de pausa, y la interna con **"Resolución"** (desde la 1.2.4, en % de la salida: 85, 75, 67, 59 o 50 %, o Auto; también en **Shaders... → Rendimiento**). Compatible con Distant Horizons para NeoForge (opcional); desde la 1.2.2, en **Shaders... → Rendimiento → Distant Horizons** eliges presets de DH probados con los shaders (Rendimiento, Balanceado, Calidad, Ultra), y el agua lejana de DH siempre tiene los reflejos de los shaders. El preset gráfico **Fabulous** ya funciona (antes el agua se volvía invisible). Desde la 1.2.3, cuando estás alto (a la altura de las nubes o arriba de ellas), los bordes de las nubes ya no se ven a través de las lomas y los árboles que tienes enfrente; con DH, una nube detrás de una montaña lejana de DH, por debajo del horizonte, todavía puede verse encima de ella. Si con DH la mitad de
 abajo de la pantalla se ve oscura (versión 1.0-alpha): en `config/DistantHorizons.toml` pon `vanillaFadeMode = "NONE"` y
 reinicia el juego; desde la 1.0-alpha.2 el mod lo hace solo.
 

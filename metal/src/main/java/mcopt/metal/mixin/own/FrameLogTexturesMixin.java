@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Measurement only (-Dmcopt.own.int.frameLog): the texture manager's tick (texture animations) in the frame it runs in. */
-@Mixin(TextureManager.class)
+@Mixin(value = TextureManager.class, remap = false)
 public class FrameLogTexturesMixin {
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void mcopt$frameLogTexturesHead(CallbackInfo ci) {

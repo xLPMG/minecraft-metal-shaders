@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.shade.shadow.mixin",
 	"plugin": "mcopt.metal.shade.shadow.mixin.ShadowMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["ShadowLevelRendererMixin", "EntityBlobShadowMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

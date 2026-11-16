@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Far terrain: chunks the client loads, and unloads with the player's changes, become far terrain with their real surface. */
-@Mixin(ClientLevel.class)
+@Mixin(value = ClientLevel.class, remap = false)
 abstract class LodClientLevelMixin {
 	@Inject(method = "onChunkLoaded", at = @At("TAIL"))
 	private void mcopt$lodChunkLoaded(ChunkPos pos, CallbackInfo ci) {

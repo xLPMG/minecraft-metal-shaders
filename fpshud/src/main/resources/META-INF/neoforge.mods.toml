@@ -1,0 +1,25 @@
+license="Apache-2.0"
+
+[[mods]]
+modId="mcopt_fps"
+version="${version}"
+displayName="mcopt FPS HUD"
+authors="Noah Dunnagan"
+description="Shows the frame rate in the top-left corner."
+
+[[mixins]]
+config="mcopt-fps.mixins.json"
+
+[[dependencies.mcopt_fps]]
+modId="neoforge"
+type="required"
+versionRange="${neoforge_version_range}"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.mcopt_fps]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="CLIENT"

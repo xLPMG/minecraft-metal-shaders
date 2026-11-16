@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import mcopt.metal.chunk.ChunkOpt;
-import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -36,7 +35,7 @@ public final class ChunkMixinPlugin implements IMixinConfigPlugin {
 		String name = mixinClassName.substring(mixinClassName.lastIndexOf('.') + 1);
 		if (!ChunkOpt.mixinEnabled(name)) return false;
 		for (String mod : YIELDS_TO.getOrDefault(name, List.of())) {
-			if (FabricLoader.getInstance().isModLoaded(mod)) {
+			if (mcopt.metal.NeoForgePlatform.isModLoaded(mod)) {
 				System.out.println("mcopt-chunk: " + name + " not applied: " + mod + " is loaded");
 				return false;
 			}

@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.shade",
 	"plugin": "mcopt.metal.mixin.shade.ShadeMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": [
 		"ShadeFaceShadeMixin",
 		"ShadeFogMixin",

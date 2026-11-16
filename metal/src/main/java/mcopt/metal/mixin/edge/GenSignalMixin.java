@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ChunkStatusTasks.class)
+@Mixin(value = ChunkStatusTasks.class, remap = false)
 abstract class GenSignalMixin {
 	// every generation step (never run for a chunk loaded from disk at FULL); chunks saved part-generated, as at the edge of an
 	// explored area, resume at a later step without generateStructureStarts

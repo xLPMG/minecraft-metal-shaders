@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** C3 (light=true|verify): the block-light map's copy() builds a base+delta snapshot instead of cloning (LightSnapshots). */
-@Mixin(targets = "net.minecraft.world.level.lighting.BlockLightSectionStorage$BlockDataLayerStorageMap")
+@Mixin(targets = "net.minecraft.world.level.lighting.BlockLightSectionStorage$BlockDataLayerStorageMap", remap = false)
 abstract class BlockLightMapMixin {
 	@Redirect(method = "copy", at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;clone()Lit/unimi/dsi/fastutil/longs/Long2ObjectOpenHashMap;"))
 	private Long2ObjectOpenHashMap<DataLayer> mcopt$noClone(Long2ObjectOpenHashMap<DataLayer> map) {

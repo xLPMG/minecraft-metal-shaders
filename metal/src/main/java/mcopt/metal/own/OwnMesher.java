@@ -165,8 +165,6 @@ public final class OwnMesher {
 		// mcopt-shade (1.2.4, issue #9): water lit per corner, not one flat value per block (not in verify mode: vanilla's is flat)
 		mcopt.metal.shade.terrain.ShadeFluidLight[] fluidLight = new mcopt.metal.shade.terrain.ShadeFluidLight[1];
 		if (mcopt.metal.shade.terrain.ShadeFluidLight.ON && startedLayers != null) fluidOutput = mcopt.metal.shade.terrain.ShadeFluidLight.wrap(fluidOutput, level, minPos, fluidLight);
-		// With Fabric API's renderer API loaded, blocks go through its renderer as Fabric API's own compile patch does
-		OwnApi.Mesher api = OwnApi.mesher(ambientOcclusion, blockColors, quads, () -> startedLayers != null ? translucent(startedLayers, builders, translucent) : Discard.INSTANCE);
 		// BlockPos.betweenClosed's order (x fastest, then y, then z) with its one mutable cursor, without the iterator
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 		int minX = minPos.getX(), minY = minPos.getY(), minZ = minPos.getZ();
@@ -190,11 +188,7 @@ public final class OwnMesher {
 						if (fluidLight[0] != null) fluidLight[0].water = fluidState.is(net.minecraft.tags.FluidTags.WATER);
 						fluidRenderer.tesselate(level, pos, fluidOutput, blockState, fluidState);
 					}
-					if (blockState.getRenderShape() == RenderShape.MODEL && api != null) {
-						// vanilla's region, not OwnRegion: Fabric API extends RenderSectionRegion (block entity render data, biomes) for FRAPI models
-						api.block(SectionPos.sectionRelative(pos.getX()), SectionPos.sectionRelative(pos.getY()), SectionPos.sectionRelative(pos.getZ()), region, pos,
-							blockState, blockModelSet.get(blockState), blockState.getSeed(pos));
-					} else if (blockState.getRenderShape() == RenderShape.MODEL && ownRenderer != null) {
+					if (blockState.getRenderShape() == RenderShape.MODEL && ownRenderer != null) {
 						ownRenderer.tesselateBlock(ModelBlockRenderer.forceOpaque(cutoutLeaves, blockState) ? opaqueQuadOutput : quadOutput,
 							SectionPos.sectionRelative(pos.getX()), SectionPos.sectionRelative(pos.getY()), SectionPos.sectionRelative(pos.getZ()), own, pos,
 							blockState, blockModelSet.get(blockState), blockState.getSeed(pos));

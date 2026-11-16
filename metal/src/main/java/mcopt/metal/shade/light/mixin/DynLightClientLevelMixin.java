@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Block and section changes into the dynamic lights' block occupancy (no light through a wall just built, at once through one just dug). */
-@Mixin(ClientLevel.class)
+@Mixin(value = ClientLevel.class, remap = false)
 abstract class DynLightClientLevelMixin {
 	@Inject(method = "sendBlockUpdated", at = @At("HEAD"))
 	private void mcopt$dynLightBlock(BlockPos pos, BlockState old, BlockState current, int updateFlags, CallbackInfo ci) {

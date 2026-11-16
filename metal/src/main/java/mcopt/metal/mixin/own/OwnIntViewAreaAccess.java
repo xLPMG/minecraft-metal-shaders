@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** OwnLife's scan: the view area's sections. */
-@Mixin(ViewArea.class)
+@Mixin(value = ViewArea.class, remap = false)
 public interface OwnIntViewAreaAccess {
 	@Accessor("sections")
 	RotatingSectionStorage<SectionRenderDispatcher.RenderSection> mcopt$sections();

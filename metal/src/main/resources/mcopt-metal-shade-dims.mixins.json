@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.shade.dims.mixin",
 	"plugin": "mcopt.metal.shade.dims.mixin.DimsMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["DimsFogMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.metal.atlasDouble: the blocks atlas double-buffered (see AtlasDouble). Does nothing without the flag. */
-@Mixin(TextureAtlas.class)
+@Mixin(value = TextureAtlas.class, remap = false)
 public class AtlasDoubleMixin {
 	@Inject(method = "upload", at = @At("RETURN"))
 	private void mcopt$adUploaded(CallbackInfo ci) {

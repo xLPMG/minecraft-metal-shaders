@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** Measurement only (-Dmcopt.own.int.frameLog): the frame's extract and render times. */
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, remap = false)
 public class FrameLogGameRendererMixin {
 	@Inject(method = "extract", at = @At("HEAD"))
 	private void mcopt$frameLogExtractHead(DeltaTracker deltaTracker, boolean advance, CallbackInfo ci) {

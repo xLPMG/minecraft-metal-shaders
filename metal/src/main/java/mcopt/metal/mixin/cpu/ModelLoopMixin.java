@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * -Dmcopt.cpu.model=true: ModelPart.compile walks its cubes with an indexed loop instead of the immutable list's iterator (the
  * iterator was 2.2% of the Neo's render thread in a 200-mob crowd). Same cubes, same order, same calls.
  */
-@Mixin(ModelPart.class)
+@Mixin(value = ModelPart.class, remap = false)
 abstract class ModelLoopMixin {
 	@Shadow @Final private List<ModelPart.Cube> cubes;
 

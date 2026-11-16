@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * and the Metal surface's drawable all have that size, and the compositor stretches the layer over the window. Both ways the
  * size reaches the game: the query (startup, fullscreen changes, the surface's configuration) and the resize event.
  */
-@Mixin(Window.class)
+@Mixin(value = Window.class, remap = false)
 abstract class ShadeWindowMixin {
 	@Inject(method = "queryFramebufferSize", at = @At("RETURN"), cancellable = true)
 	private void mcopt$outputSize(CallbackInfoReturnable<Window.FramebufferSize> cir) {

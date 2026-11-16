@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /** -Dmcopt.own.int.visible (OwnVisible): each section's position as vanilla adds it to its visible list. */
-@Mixin(SectionOcclusionGraph.class)
+@Mixin(value = SectionOcclusionGraph.class, remap = false)
 abstract class OwnIntVisibleMixin {
 	@Redirect(method = "lambda$addSectionsInFrustum$0", at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 0))
 	private static boolean mcopt$stampVisible(List<Object> list, Object section) {

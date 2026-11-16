@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.shade.light.mixin",
 	"plugin": "mcopt.metal.shade.light.mixin.DynLightMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["DynLightClientLevelMixin", "DynLightEntityRendererMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

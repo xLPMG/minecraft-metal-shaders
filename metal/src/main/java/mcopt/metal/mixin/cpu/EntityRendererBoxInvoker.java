@@ -6,7 +6,7 @@ import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(EntityRenderer.class)
+@Mixin(value = EntityRenderer.class, remap = false)
 public interface EntityRendererBoxInvoker {
 	@Invoker("getBoundingBoxForCulling")
 	AABB mcopt$box(Entity entity, float partialTicks);

@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * (EntityCasters.dropBlob: sunlit ground with sky light >= 5); caves, dark interiors, the night, the Nether and the End keep
  * them. Applied only with mcopt.shade=true and shadows on (ShadowMixinPlugin); inert while entity shadows are off.
  */
-@Mixin(EntityRenderer.class)
+@Mixin(value = EntityRenderer.class, remap = false)
 abstract class EntityBlobShadowMixin {
 	@Inject(method = "extractShadowPiece", at = @At("HEAD"), cancellable = true)
 	private void mcopt$realShadowHere(EntityRenderState state, Level level, float pow, BlockPos.MutableBlockPos pos, ChunkAccess chunk, CallbackInfo ci) {

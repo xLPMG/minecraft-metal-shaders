@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Native shading's TAA jitter at the source: every world draw copies its projection from the camera state, so a sub-pixel
  * offset put in the projection matrix reaches vanilla, Sodium and Distant Horizons draws alike (far-terrain-plan §3.2-3).
  */
-@Mixin(Camera.class)
+@Mixin(value = Camera.class, remap = false)
 abstract class ShadeTaaCameraMixin {
 	@Inject(method = "extractRenderState", at = @At("TAIL"))
 	private void mcopt$taaJitter(CameraRenderState cameraState, DeltaTracker deltaTracker, CallbackInfo ci) {

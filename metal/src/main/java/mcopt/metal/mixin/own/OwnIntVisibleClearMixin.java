@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.own.int.visible (OwnVisible): a new generation whenever vanilla clears its visible list; its section set dropped with the ViewArea. */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, remap = false)
 abstract class OwnIntVisibleClearMixin {
 	@Inject(method = "clearVisibleSections", at = @At("HEAD"))
 	private void mcopt$visibleCleared(org.spongepowered.asm.mixin.injection.callback.CallbackInfo ci) {

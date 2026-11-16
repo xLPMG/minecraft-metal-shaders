@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * the compact range, the frame after a toggle) makes a buffer non-empty and the walk runs as before. Checked under vanilla's own
  * lock, as its walk reads the buffers.
  */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, remap = false)
 abstract class OwnIntListsMixin {
 	@Unique
 	private static final String MCOPT$MODE = System.getProperty("mcopt.own.int.lists", "false");

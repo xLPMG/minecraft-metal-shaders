@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * level already exists, so during a join it renders uncapped (32% of the Neo's render thread during the join). Its
  * close check runs on the client tick, which the cap doesn't change.
  */
-@Mixin(FramerateLimitTracker.class)
+@Mixin(value = FramerateLimitTracker.class, remap = false)
 abstract class LoadingFpsMixin {
 	@Shadow @Final private Minecraft minecraft;
 

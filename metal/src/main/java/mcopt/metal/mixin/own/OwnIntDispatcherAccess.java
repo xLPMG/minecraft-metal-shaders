@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** -Dmcopt.own.int.lists: vanilla's per-layer uber buffers. */
-@Mixin(SectionRenderDispatcher.class)
+@Mixin(value = SectionRenderDispatcher.class, remap = false)
 public interface OwnIntDispatcherAccess {
 	@Accessor("chunkUberBuffers")
 	Map<?, ?> mcopt$uberBuffers();

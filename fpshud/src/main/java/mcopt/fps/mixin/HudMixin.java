@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** "NN fps" in the top-left corner while playing. Hidden with the HUD (F1) and while F3 shows its own counter. */
-@Mixin(Hud.class)
+@Mixin(value = Hud.class, remap = false)
 abstract class HudMixin {
 	@Shadow @Final private Minecraft minecraft;
 	@Shadow public abstract boolean isHidden();

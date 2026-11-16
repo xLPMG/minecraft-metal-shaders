@@ -32,6 +32,7 @@ final class MetalRenderPass implements RenderPassBackend {
 	private final MetalEncoder encoder;
 	private final long enc;
 	private final int areaX, areaY, areaWidth, areaHeight;
+	private int viewportX, viewportY, viewportWidth, viewportHeight;
 	private @Nullable MetalPipeline pipeline;
 	private final Object[] pending = new Object[MAX_UNIFORMS];
 	private final Object[] bound = new Object[MAX_UNIFORMS];
@@ -65,7 +66,8 @@ final class MetalRenderPass implements RenderPassBackend {
 	/** A format redirect's color formats (MetalHooks.Redirect.formats): pipelines draw through their variants for them; null otherwise. */
 	private final int @Nullable [] formats;
 
-	MetalRenderPass(MetalEncoder encoder, boolean hasDepth, int x, int y, int width, int height, @Nullable PassDelegate delegate, int @Nullable [] formats) {
+	MetalRenderPass(MetalEncoder encoder, boolean hasDepth, int x, int y, int width, int height, int viewportWidth, int viewportHeight,
+		@Nullable PassDelegate delegate, int @Nullable [] formats) {
 		this.encoder = encoder;
 		this.formats = formats;
 		this.enc = encoder.enc;
@@ -75,6 +77,8 @@ final class MetalRenderPass implements RenderPassBackend {
 		this.areaY = y;
 		this.areaWidth = width;
 		this.areaHeight = height;
+		this.viewportWidth = viewportWidth;
+		this.viewportHeight = viewportHeight;
 		this.enableScissor(x, y, width, height);
 	}
 
@@ -171,6 +175,7 @@ final class MetalRenderPass implements RenderPassBackend {
 			}
 		}
 		Native.scissor(this.enc, this.scissor[0], this.scissor[1], this.scissor[2], this.scissor[3]);
+		Native.viewport(this.enc, this.viewportX, this.viewportY, this.viewportWidth, this.viewportHeight);
 		for (int slot = 0; slot < this.vertexBuffers.length; slot++) {
 			GpuBufferSlice vb = this.vertexBuffers[slot];
 			if (vb != null) Native.vertexBuffer(this.enc, MetalConst.VERTEX_BUFFER_BASE + slot, this.encoder.use(vb.buffer()).handle, vb.offset());
@@ -202,6 +207,7 @@ final class MetalRenderPass implements RenderPassBackend {
 		this.dirtyUpTo = Objects.requireNonNull(this.pipeline).uniforms.size();
 		this.bindUniforms(0);
 		Native.scissor(this.enc, this.scissor[0], this.scissor[1], this.scissor[2], this.scissor[3]);
+		Native.viewport(this.enc, this.viewportX, this.viewportY, this.viewportWidth, this.viewportHeight);
 		for (int slot = 0; slot < this.vertexBuffers.length; slot++) {
 			GpuBufferSlice vb = this.vertexBuffers[slot];
 			if (vb != null) Native.vertexBuffer(this.enc, MetalConst.VERTEX_BUFFER_BASE + slot, this.encoder.use(vb.buffer()).handle, vb.offset());
@@ -247,6 +253,15 @@ final class MetalRenderPass implements RenderPassBackend {
 			this.pushConstantsLength = value.remaining();
 			value.get(value.position(), this.pushConstants, 0, this.pushConstantsLength);
 		}
+	}
+
+	@Override
+	public void setViewport(int x, int y, int width, int height) {
+		this.viewportX = x;
+		this.viewportY = y;
+		this.viewportWidth = width;
+		this.viewportHeight = height;
+		Native.viewport(this.enc, x, y, width, height);
 	}
 
 	@Override

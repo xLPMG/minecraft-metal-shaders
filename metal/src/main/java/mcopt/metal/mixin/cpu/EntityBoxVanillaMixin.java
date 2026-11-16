@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /** -Dmcopt.cpu.entityBox: vanilla's frustum test reuses the box Sodium just computed (see EntityBox). */
-@Mixin(EntityRenderer.class)
+@Mixin(value = EntityRenderer.class, remap = false)
 abstract class EntityBoxVanillaMixin {
 	@Redirect(method = "shouldRender", at = @At(value = "INVOKE",
 		target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;getBoundingBoxForCulling(Lnet/minecraft/world/entity/Entity;F)Lnet/minecraft/world/phys/AABB;"))

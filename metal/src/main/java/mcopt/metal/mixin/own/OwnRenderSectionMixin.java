@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * A compiled section's solid and cutout layers go to our arena on the worker that meshed them (vanilla's uber buffers and their
  * staging copy are skipped for those layers), and the section's mesh changes reach our section table.
  */
-@Mixin(SectionRenderDispatcher.RenderSection.class)
+@Mixin(value = SectionRenderDispatcher.RenderSection.class, remap = false)
 abstract class OwnRenderSectionMixin {
 	@Shadow
 	@Final

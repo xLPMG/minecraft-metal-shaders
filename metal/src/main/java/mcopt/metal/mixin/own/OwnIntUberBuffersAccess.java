@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** -Dmcopt.own.int.lists: a layer's vertex uber buffer (SectionRenderDispatcher's private record). */
-@Mixin(targets = "net.minecraft.client.renderer.chunk.SectionRenderDispatcher$SectionUberBuffers")
+@Mixin(targets = "net.minecraft.client.renderer.chunk.SectionRenderDispatcher$SectionUberBuffers", remap = false)
 public interface OwnIntUberBuffersAccess {
 	@Accessor("vertexBuffer")
 	UberGpuBuffer<?> mcopt$vertexBuffer();

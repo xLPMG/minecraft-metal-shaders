@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * (1.1) Above them "Shaders..." opens ShadeSettingsScreen (look, light, sky and water settings); with
  * mcopt.shade.settingsButton=false it is left out. (1.2.1) With the shaders off it is the only button, opening ShadeOffScreen.
  */
-@Mixin(PauseScreen.class)
+@Mixin(value = PauseScreen.class, remap = false)
 abstract class ShadePauseScreenMixin extends Screen {
 	protected ShadePauseScreenMixin(Component title) {
 		super(title);

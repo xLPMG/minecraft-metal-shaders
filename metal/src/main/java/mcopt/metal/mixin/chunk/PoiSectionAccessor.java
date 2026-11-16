@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** D1 (poi=true): the section's records by type, iterated in the same order as its getRecords stream. */
-@Mixin(PoiSection.class)
+@Mixin(value = PoiSection.class, remap = false)
 public interface PoiSectionAccessor {
 	@Accessor("byType")
 	Map<Holder<PoiType>, Set<PoiRecord>> mcopt$byType();

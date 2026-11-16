@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * -Dmcopt.own.mesh.tint: a tint cache miss during our compile is blended from that compile's biome and colour arrays (same
  * integer result; vanilla's BlockTintCache still stores it). Any other caller: untouched.
  */
-@Mixin(ClientLevel.class)
+@Mixin(value = ClientLevel.class, remap = false)
 abstract class OwnMeshTintMixin {
 	@Inject(method = "calculateBlockTint", at = @At("HEAD"), cancellable = true)
 	private void mcopt$ownTint(BlockPos pos, ColorResolver colorResolver, CallbackInfoReturnable<Integer> cir) {

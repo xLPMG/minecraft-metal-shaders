@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * D1 (-Dmcopt.chunk.poi=true): AcquirePoi's POI search (13% of the server thread on the Neo with 200 mobs) through PoiScan's
  * loops instead of nested streams. Only this call site: it consumes the stream immediately (see PoiScan for why that is exact).
  */
-@Mixin(AcquirePoi.class)
+@Mixin(value = AcquirePoi.class, remap = false)
 abstract class AcquirePoiMixin {
 	@Redirect(method = "lambda$create$3", at = @At(value = "INVOKE",
 		target = "Lnet/minecraft/world/entity/ai/village/poi/PoiManager;findAllClosestFirstWithType(Ljava/util/function/Predicate;Ljava/util/function/Predicate;Lnet/minecraft/core/BlockPos;ILnet/minecraft/world/entity/ai/village/poi/PoiManager$Occupancy;)Ljava/util/stream/Stream;"))

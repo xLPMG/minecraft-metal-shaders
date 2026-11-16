@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * comes back with mcopt.shade=false. {@code mcopt.shade.oitOff} (default true, read every call): false = M3.2 (the option
  * as set).
  */
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, remap = false)
 abstract class ShadeOitMixin {
 	@Unique private static boolean mcopt$logged;
 

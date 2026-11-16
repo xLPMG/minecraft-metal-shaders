@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * after the world with the game's own shaders, and its third-person model use) is raised to the dynamic block light level
  * at its light probe (DynLights.levelAt). Other entities get the lights per vertex in the world pass (DynLightMsl).
  */
-@Mixin(EntityRenderer.class)
+@Mixin(value = EntityRenderer.class, remap = false)
 abstract class DynLightEntityRendererMixin {
 	@Inject(method = "getPackedLightCoords", at = @At("RETURN"), cancellable = true)
 	private void mcopt$dynLightPlayer(Entity entity, float partialTickTime, CallbackInfoReturnable<Integer> cir) {

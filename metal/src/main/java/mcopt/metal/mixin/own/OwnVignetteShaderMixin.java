@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** Invalidate before asynchronous reload; whitelist only after successful pipeline installation. */
-@Mixin(ShaderManager.class)
+@Mixin(value = ShaderManager.class, remap = false)
 abstract class OwnVignetteShaderMixin {
 	@Inject(method = "reload", at = @At("HEAD"))
 	private void mcopt$vignetteReload(CallbackInfoReturnable<CompletableFuture<Void>> ci) {

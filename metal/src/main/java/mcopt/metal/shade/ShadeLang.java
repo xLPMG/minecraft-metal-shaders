@@ -21,8 +21,7 @@ import net.minecraft.client.Minecraft;
 
 /**
  * (2026-10-11) The pause menu buttons' language: Spanish when the game's language is any Spanish (es_mx, es_es, ...), else
- * English. Chosen in code from Options.languageCode instead of lang files: a mod's assets need Fabric API's resource loader,
- * and the instance without Distant Horizons has no Fabric API.
+ * English. Chosen in code from Options.languageCode, with translation tables loaded directly from the jar.
  * (2026-10-19) Chinese: the English text through a table in the jar (mcopt/shade/lang/zh_cn.json; zh_tw.json, with Taiwan
  * terms, for zh_tw and zh_hk), read from the classpath like the shaders. A text the table lacks stays English;
  * tools/lang/check.py lists them.

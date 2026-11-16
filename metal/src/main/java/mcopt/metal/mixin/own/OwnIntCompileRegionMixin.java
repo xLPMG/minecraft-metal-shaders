@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * read by cancelTasks, whose cancel() on a finished task sets a flag nothing reads any more. Only the task's own field is written here
  * (the render thread may store a newer task in lastCompileTask meanwhile, so that field is left alone). A doTask that throws keeps it.
  */
-@Mixin(targets = "net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection$CompileTask")
+@Mixin(targets = "net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection$CompileTask", remap = false)
 abstract class OwnIntCompileRegionMixin {
 	private static final boolean MCOPT$ON = Boolean.getBoolean("mcopt.own.int.compileRegionDrop");
 	private static final AtomicLong MCOPT$DROPPED = new AtomicLong();

@@ -86,6 +86,7 @@ final class Native {
 	private static final MethodHandle R_BYTES = fn("mc_r_bytes", true, null, JAVA_LONG, JAVA_INT, JAVA_LONG, JAVA_INT);
 	private static final MethodHandle R_TEXTURE = fn("mc_r_texture", true, null, JAVA_LONG, JAVA_INT, JAVA_LONG, JAVA_LONG);
 	private static final MethodHandle R_SCISSOR = fn("mc_r_scissor", true, null, JAVA_LONG, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT);
+	private static final MethodHandle R_VIEWPORT = fn("mc_r_viewport", true, null, JAVA_LONG, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT);
 	private static final MethodHandle R_INDEX = fn("mc_r_index", true, null, JAVA_LONG, JAVA_LONG, JAVA_INT);
 	private static final MethodHandle R_USE = fn("mc_r_use", true, null, JAVA_LONG, JAVA_LONG);
 	private static final MethodHandle GPU_ADDRESS = fn("mc_buffer_gpu_address", true, JAVA_LONG, JAVA_LONG);
@@ -105,6 +106,7 @@ final class Native {
 	private static final MethodHandle R_LABEL = fn("mc_r_label", false, null, JAVA_LONG, JAVA_LONG);
 	private static final MethodHandle CLEAR_RECT = fn("mc_clear_rect", false, null, JAVA_LONG, JAVA_LONG, JAVA_LONG,
 		JAVA_FLOAT, JAVA_FLOAT, JAVA_FLOAT, JAVA_FLOAT, JAVA_FLOAT, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT, JAVA_INT);
+	private static final MethodHandle CLEAR_STENCIL = fn("mc_clear_stencil", false, null, JAVA_LONG, JAVA_LONG, JAVA_INT, JAVA_INT);
 	private static final MethodHandle LAYER_CONFIGURE = fn("mc_layer_configure", false, null, JAVA_LONG, JAVA_LONG, JAVA_INT, JAVA_INT, JAVA_INT);
 	private static final MethodHandle LAYER_NEXT = fn("mc_layer_next", false, JAVA_LONG, JAVA_LONG);
 	private static final MethodHandle PRESENT = fn("mc_present", false, null, JAVA_LONG, JAVA_LONG, JAVA_LONG);
@@ -213,6 +215,7 @@ final class Native {
 	static void bytes(long enc, int index, long bytes, int length) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.bytes(index, bytes, length); try { R_BYTES.invokeExact(enc, index, bytes, length); } catch (Throwable t) { throw rethrow(t); } }
 	static void texture(long enc, int index, long texture, long sampler) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.texture(index, texture, sampler); try { R_TEXTURE.invokeExact(enc, index, texture, sampler); } catch (Throwable t) { throw rethrow(t); } }
 	static void scissor(long enc, int x, int y, int w, int h) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.scissor(x, y, w, h); try { R_SCISSOR.invokeExact(enc, x, y, w, h); } catch (Throwable t) { throw rethrow(t); } }
+	static void viewport(long enc, int x, int y, int w, int h) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.unsupported("setViewport"); try { R_VIEWPORT.invokeExact(enc, x, y, w, h); } catch (Throwable t) { throw rethrow(t); } }
 	static void index(long enc, long buffer, int intIndices) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.index(buffer, intIndices); try { R_INDEX.invokeExact(enc, buffer, intIndices); } catch (Throwable t) { throw rethrow(t); } }
 	static void useResource(long enc, long buffer) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.use(buffer); try { R_USE.invokeExact(enc, buffer); } catch (Throwable t) { throw rethrow(t); } }
 	static long gpuAddress(long buffer) { try { return (long) GPU_ADDRESS.invokeExact(buffer); } catch (Throwable t) { throw rethrow(t); } }
@@ -231,6 +234,7 @@ final class Native {
 	static void debugPop(long enc) { try { R_DEBUG_POP.invokeExact(enc); } catch (Throwable t) { throw rethrow(t); } }
 	static void renderLabel(long enc, long label) { try { R_LABEL.invokeExact(enc, label); } catch (Throwable t) { throw rethrow(t); } }
 	static void clearRect(long enc, long color, long depth, float r, float g, float b, float a, float depthValue, int x, int y, int w, int h, int mip) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.clearRect(color, depth, r, g, b, a, depthValue, x, y, w, h, mip); try { CLEAR_RECT.invokeExact(enc, color, depth, r, g, b, a, depthValue, x, y, w, h, mip); } catch (Throwable t) { throw rethrow(t); } }
+	static void clearStencil(long enc, long texture, int value, int mipLevels) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.unsupported("clearStencilTexture"); try { CLEAR_STENCIL.invokeExact(enc, texture, value, mipLevels); } catch (Throwable t) { throw rethrow(t); } }
 	static void layerConfigure(long ctx, long layer, int w, int h, int vsync) { try { LAYER_CONFIGURE.invokeExact(ctx, layer, w, h, vsync); } catch (Throwable t) { throw rethrow(t); } }
 	static long layerNext(long layer) { try { return (long) LAYER_NEXT.invokeExact(layer); } catch (Throwable t) { throw rethrow(t); } }
 	static void present(long enc, long drawable, long texture) { if (FrameCapture.FULL && FrameCapture.active()) FrameCapture.present(texture); try { PRESENT.invokeExact(enc, drawable, texture); } catch (Throwable t) { throw rethrow(t); } }

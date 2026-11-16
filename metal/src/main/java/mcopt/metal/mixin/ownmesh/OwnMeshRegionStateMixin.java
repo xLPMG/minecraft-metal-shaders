@@ -10,11 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/**
- * -Dmcopt.own.mesh.frapiRegion: while our compile runs on this region (Fabric API's renderer reads it), block and fluid states
- * come from the compile's OwnRegion cache: the same states, each read from the section copy once. Any other use: untouched.
- */
-@Mixin(RenderSectionRegion.class)
+/** Legacy Fabric Renderer API path for serving state reads from the active compile cache. */
+@Mixin(value = RenderSectionRegion.class, remap = false)
 abstract class OwnMeshRegionStateMixin {
 	@Inject(method = "getBlockState", at = @At("HEAD"), cancellable = true)
 	private void mcopt$ownState(BlockPos pos, CallbackInfoReturnable<BlockState> cir) {

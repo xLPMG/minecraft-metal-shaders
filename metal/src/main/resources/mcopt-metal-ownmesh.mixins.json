@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.ownmesh",
 	"plugin": "mcopt.metal.mixin.ownmesh.OwnMeshMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": ["OwnMeshCompilerMixin", "OwnMeshResultsMixin", "OwnMeshCompiledMixin", "OwnMeshLighterCacheMixin", "OwnMeshRegionAccessMixin", "OwnMeshSectionCopyMixin", "OwnMeshTintMixin", "OwnMeshRegionStateMixin"],
 	"injectors": { "defaultRequire": 1 }
 }

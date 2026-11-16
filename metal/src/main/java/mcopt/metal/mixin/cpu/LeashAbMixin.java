@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.cpu.leash=ab: times the frame's entity pass with the leash shortcut alternately off and on (per frame). */
-@Mixin(LevelExtractor.class)
+@Mixin(value = LevelExtractor.class, remap = false)
 abstract class LeashAbMixin {
 	@Unique private static final Ab mcopt$ab = new Ab("leash.extractVisibleEntities");
 

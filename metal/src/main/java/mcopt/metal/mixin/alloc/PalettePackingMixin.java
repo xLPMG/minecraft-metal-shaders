@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /** Reuse only pack's temporary unpacked IDs. Vanilla still owns locking, palette construction and the saved data. */
-@Mixin(PalettedContainer.class)
+@Mixin(value = PalettedContainer.class, remap = false)
 abstract class PalettePackingMixin<T> {
 	@WrapMethod(method = "pack")
 	private PalettedContainerRO.PackedData<T> mcopt$packingScope(Strategy<T> strategy,

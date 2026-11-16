@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * defines getMinY, from its final levelHeightAccessor), so it is evaluated once when the chunk is constructed. Calls made during
  * construction take the original chain.
  */
-@Mixin(ChunkAccess.class)
+@Mixin(value = ChunkAccess.class, remap = false)
 abstract class ChunkAccessSectionMixin implements LevelHeightAccessor {
 	@Shadow @Final protected LevelHeightAccessor levelHeightAccessor;
 	@Unique private int mcopt$minSectionY;

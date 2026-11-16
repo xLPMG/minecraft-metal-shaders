@@ -3,6 +3,7 @@
 	"package": "mcopt.metal.mixin.chunk",
 	"plugin": "mcopt.metal.mixin.chunk.ChunkMixinPlugin",
 	"compatibilityLevel": "JAVA_25",
+	"refmap": "mcopt_metal.refmap.json",
 	"client": [
 		"PalettedContainerFactoryMixin",
 		"AcquirePoiMixin",

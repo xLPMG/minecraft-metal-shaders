@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * makes it current: nothing in flight reads it. Exact: the update is a full-screen triangle without blending whose output depends only on
  * its uniforms, so every texel is rewritten, and getTextureView() hands out the one last written. 1 KB more memory.
  */
-@Mixin(Lightmap.class)
+@Mixin(value = Lightmap.class, remap = false)
 public class LightmapDoubleMixin {
 	@Unique
 	private static final boolean MCOPT_ON = Boolean.getBoolean("mcopt.metal.lightmapDouble");

@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * game's shaders and Sodium's). Its distances are kept for our fog's density (ShadeDims.vanillaFog). The render distance
  * fog is left as it is.
  */
-@Mixin(FogRenderer.class)
+@Mixin(value = FogRenderer.class, remap = false)
 abstract class DimsFogMixin {
 	@Shadow
 	private FogType getFogType(Camera camera) {

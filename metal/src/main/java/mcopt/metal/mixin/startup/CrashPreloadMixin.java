@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * -Dmcopt.startup.crashPreload=async: CrashReport.preload() is MemoryReserve.allocate() plus a throw-away report that loads the
  * reporting classes and probes the hardware. The reserve stays on the main thread; the throw-away report moves to a daemon thread.
  */
-@Mixin(Main.class)
+@Mixin(value = Main.class, remap = false)
 abstract class CrashPreloadMixin {
 	@Redirect(method = "main", at = @At(value = "INVOKE", target = "Lnet/minecraft/CrashReport;preload()V"))
 	private static void mcopt$async() {

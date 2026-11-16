@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * cache. With parallel, the loop only collects the states (the id map order is unchanged); their caches are built in parallel by
  * {@link BootstrapCacheMixin} once Blocks' class initialisation has finished (from inside it, workers deadlock on its init lock).
  */
-@Mixin(Blocks.class)
+@Mixin(value = Blocks.class, remap = false)
 abstract class BlockCacheMixin {
 	@Redirect(method = "lambda$static$429", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;initCache()V"))
 	private static void mcopt$defer(BlockState state) {

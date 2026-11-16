@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** D3 (ticks=true): the level's block-position LCG state used by getBlockRandomPos. */
-@Mixin(Level.class)
+@Mixin(value = Level.class, remap = false)
 public interface LevelRandAccessor {
 	@Accessor("randValue")
 	int mcopt$randValue();

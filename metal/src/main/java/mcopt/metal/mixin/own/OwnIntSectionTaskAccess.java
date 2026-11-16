@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /** OwnLife: a section task's cancellation flag. */
-@Mixin(SectionRenderDispatcher.RenderSection.SectionTask.class)
+@Mixin(value = SectionRenderDispatcher.RenderSection.SectionTask.class, remap = false)
 public interface OwnIntSectionTaskAccess {
 	@Accessor("isCancelled")
 	AtomicBoolean mcopt$cancelled();

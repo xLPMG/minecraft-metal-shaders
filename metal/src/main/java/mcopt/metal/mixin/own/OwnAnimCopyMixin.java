@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /** -Dmcopt.own.int.animCopy: the atlas's animation draws through AnimCopy (a small target and copies) instead of passes over whole mips. */
-@Mixin(TextureAtlas.class)
+@Mixin(value = TextureAtlas.class, remap = false)
 public class OwnAnimCopyMixin {
 	@Inject(method = "uploadAnimationFrames", at = @At("HEAD"), cancellable = true)
 	private void mcopt$animCopy(CallbackInfo ci) {

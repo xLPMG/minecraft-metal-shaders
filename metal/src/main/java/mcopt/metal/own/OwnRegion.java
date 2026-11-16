@@ -43,9 +43,8 @@ public final class OwnRegion implements BlockAndTintGetter {
 	 */
 	static final boolean AOCACHE = Boolean.getBoolean("mcopt.own.mesh.aocache");
 	/**
-	 * -Dmcopt.own.mesh.frapiRegion=true: during our compile, vanilla's RenderSectionRegion (which Fabric API's renderer gets, as
-	 * Fabric API extends that class) answers getBlockState / getFluidState from this cache (OwnMeshRegionStateMixin), and the
-	 * lighter's cache hook accepts it too. Misses read the region's section copies directly (no recursion through the hook).
+	 * Legacy Fabric Renderer API path. It lets an external model renderer read states from this cache; the NeoForge build
+	 * does not enable that path.
 	 */
 	public static final boolean FRAPI_REGION = Boolean.getBoolean("mcopt.own.mesh.frapiRegion");
 	private SectionCopy[] copies;
