@@ -9,6 +9,7 @@
 		"ShadeFogMixin",
 		"ShadeGameRendererMixin",
 		"ShadeLevelRendererMixin",
+		"ShadeLevelExtractorMixin",
 		"ShadePostMixin",
 		"ShadeTaaGameRendererMixin",
 		"ShadeTaaCameraMixin",

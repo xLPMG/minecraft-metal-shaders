@@ -24,6 +24,7 @@ typedef struct {
 	id<MTLTexture> colors[MAX_COLORS];  // attachments of `render`, compared by identity only
 	id<MTLTexture> depth;
 	int colorCount;
+	int passWidth, passHeight;  // render target extent at the start of the pass
 	int viewportX, viewportY, width, height;  // of `render`'s viewport
 	// Attachments whose contents died while `render` was open (the game cleared them): bit i = color i, bit 8 = depth.
 	// Their store actions are decided at endEncoding, so dead ones are never written back to memory.
@@ -81,4 +82,5 @@ void mc_render_resume(Enc *enc, id<MTLComputeCommandEncoder> compute);
 extern const char *mc_reopen_why;  // -Dmcopt.metal.labels: why the next mc_render_reopen happens (its encoder's name)
 void mc_render_reopen(Enc *enc);  // reopens the pass mc_frame_cmd ended (attachments loaded back; native shading's water capture)
 extern void (*mc_reopen_hook)(Enc *enc);  // mcopt-shade: run after every reopen (mc_render_reopen, mc_tl_restart); NULL without shading
+id<MTLBuffer> mc_buffer_private(Ctx *ctx, id<MTLBuffer> src, uint64_t size);  // one-off private copy for static index buffers
 MTLMathMode mc_math(void);  // (1.1.1) the float math mode MSL compiles with: fast unless -Dmcopt.shade.mathMode says otherwise (mc_math_mode)
